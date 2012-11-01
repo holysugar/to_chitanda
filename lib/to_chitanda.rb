@@ -1,6 +1,9 @@
 require "to_chitanda/version"
 require "to_chitanda/kansuuji"
+require "to_chitanda/chitanda"
 
-module ToChitanda
-  # Your code goes here...
+class Integer
+  def to_chitanda
+    ToChitanda::Chitanda.chitanda(self)
+  end
 end
