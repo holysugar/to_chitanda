@@ -41,6 +41,10 @@ describe ToChitanda::Kansuuji do
     it "lt 0 raises ArgumentError" do
       lambda{ kansuuji(-1) }.must_raise ArgumentError
     end
+
+    it "gte 1_0000_0000_0000_0000 raises ArgumentError" do
+      lambda{ kansuuji(1_0000_0000_0000_0000) }.must_raise ArgumentError
+    end
   end
 
 end
