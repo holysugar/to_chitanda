@@ -6,18 +6,27 @@ module ToChitanda
 
     KANJI_NUMBERS = %w(〇 一 二 三 四 五 六 七 八 九)
     LOWER_RANKS   = [nil] + %w(十 百 千)
+    UPPER_RANKS   = [nil] + %w(万 億 兆)
 
     def kansuuji(number)
       raise ArgumentError, "can't calculate negative number" if number < 0
+      return KANJI_NUMBERS[0] if number == 0
 
-      number, lower = number.divmod(10000)
+      ranks   = UPPER_RANKS.dup
+      results = []
 
-      kansuuji_lower_10000(lower)
+      while number > 0
+        number, lower = number.divmod(10000)
+        results << "#{kansuuji_lower(lower, ranks.shift)}"
+      end
+
+      results.reverse.join
     end
 
     private
-    def kansuuji_lower_10000(number)
-      return KANJI_NUMBERS[number] if number <= 9
+    def kansuuji_lower(number, suffix = nil)
+      return ''                                  if number == 0
+      return "#{KANJI_NUMBERS[number]}#{suffix}" if number <= 9
       ranks = LOWER_RANKS.dup
       kanjis = []
 
@@ -32,8 +41,7 @@ module ToChitanda
         kanjis << kanji
       end
 
-      kanjis.reverse.join
-
+      "#{kanjis.reverse.join}#{suffix}"
     end
 
     extend self
