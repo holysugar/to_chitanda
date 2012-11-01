@@ -1,6 +1,6 @@
 # ToChitanda
 
-TODO: Write a gem description
+Integer#to_chitanda
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+1000.to_chitanda #=> "千反田える"
+```
 
 ## Contributing
 
